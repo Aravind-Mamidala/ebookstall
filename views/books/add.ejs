@@ -1,0 +1,169 @@
+<% layout("/layouts/boilerplate") %>
+
+<!-- Title Section -->
+<div class="form-title">
+    <h1>Add New Book</h1>
+</div>
+
+<!-- Form -->
+<form action="/books/add" method="POST" class="book-form">
+    <label for="title">Book Title</label>
+    <input type="text" name="title" id="title" required placeholder="Enter book title" />
+
+    <label for="author">Author</label>
+    <input type="text" name="author" id="author" required placeholder="Enter author's name" />
+
+    <label for="price">Price ($)</label>
+    <input type="number" name="price" id="price" required placeholder="Enter book price" />
+
+    <label for="coverImage">Cover Image URL</label>
+    <input type="text" name="coverImage" id="coverImage" required placeholder="Enter cover image URL" />
+
+    <!-- Category Dropdown -->
+    <label for="category">Category</label>
+    <select name="category" id="category" required>
+        <option value="" disabled selected>Select Category</option>
+        <option value="cse">CSE</option>
+        <option value="ece">ECE</option>
+        <option value="ee">EE</option>
+        <option value="civil">Civil</option>
+        <option value="mech">Mechanical</option>
+        <option value="ai_ml">AI & ML</option>
+    </select>
+
+    <!-- Description Textarea -->
+    <label for="description">Description</label>
+    <textarea name="description" id="description" required placeholder="Describe the book..."></textarea>
+
+    <!-- Submit Button -->
+    <button type="submit">Add Book</button>
+</form>
+
+<style>
+    /* General Page Styling */
+    body {
+        background-color: #f4f7fc;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* Form Container */
+    .book-form {
+        width: 100%;
+        max-width: 480px;
+        margin: 40px auto;
+        padding: 30px;
+        background: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        box-sizing: border-box;
+        font-size: 1.1rem;
+    }
+
+    /* Form Title */
+    .form-title {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .form-title h1 {
+        font-size: 2rem;
+        color: #333;
+        font-weight: 600;
+        letter-spacing: 1px;
+    }
+
+    /* Input and Select Styling */
+    .book-form input,
+    .book-form select,
+    .book-form textarea {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 18px;
+        border-radius: 8px;
+        border: 1px solid #e0e0e0;
+        background-color: #f9f9f9;
+        font-size: 1rem;
+        color: #333;
+        outline: none;
+        transition: 0.3s ease;
+    }
+
+    /* Input Focus Styling */
+    .book-form input:focus,
+    .book-form select:focus,
+    .book-form textarea:focus {
+        border-color: #4caf50;
+        background-color: #e8f5e9;
+    }
+
+    /* Placeholder Styling */
+    .book-form input::placeholder,
+    .book-form textarea::placeholder {
+        color: #b0b0b0;
+        font-style: italic;
+    }
+
+    /* Textarea Styling */
+    .book-form textarea {
+        min-height: 120px;
+        resize: vertical;
+    }
+
+    /* Button Styling */
+    .book-form button {
+        width: 100%;
+        padding: 12px;
+        font-size: 1.2rem;
+        color: white;
+        background-color: #4caf50;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: 0.3s ease;
+        margin-top: 10px;
+    }
+
+    /* Button Hover Effect */
+    .book-form button:hover {
+        background-color: #388e3c;
+    }
+
+    /* Button Active Effect */
+    .book-form button:active {
+        background-color: #2c6e31;
+    }
+
+    /* Category Select Styling */
+    #category {
+        font-size: 1rem;
+        padding: 12px;
+    }
+
+    /* Labels */
+    .book-form label {
+        font-weight: 500;
+        color: #333;
+        margin-bottom: 8px;
+    }
+
+    /* Neumorphism Effect for Inputs */
+    .book-form input,
+    .book-form select,
+    .book-form textarea {
+        box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.1), -6px -6px 12px rgba(255, 255, 255, 0.9);
+    }
+
+    /* Submit Button */
+    .book-form button {
+        background: linear-gradient(145deg, #4caf50, #81c784);
+        box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.1), -6px -6px 12px rgba(255, 255, 255, 0.9);
+    }
+
+    .book-form button:hover {
+        background: linear-gradient(145deg, #388e3c, #66bb6a);
+    }
+
+    .book-form button:active {
+        background: linear-gradient(145deg, #2c6e31, #4caf50);
+    }
+</style>

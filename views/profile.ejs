@@ -1,0 +1,48 @@
+<% layout('/layouts/boilerplate') %>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg p-4">
+                <div class="card-body text-center">
+                    <h2 class="card-title">👤 Your Profile</h2>
+                    <hr>
+                    <div class="profile-info text-left">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><strong>👤 Name:</strong> <%= user.name %></li>
+                            <li class="list-group-item"><strong>📧 Email:</strong> <%= user.email %></li>
+                            <li class="list-group-item">
+                                <strong>📅 Joined:</strong>
+                                <%= user.createdAt ? new Date(user.createdAt).toDateString() : "Not Available" %>
+                            </li>
+                            <li class="list-group-item"><strong>🛍️ Orders:</strong> <%= user.orders ? user.orders.length : 0 %></li>
+                        </ul>
+                    </div>
+                    <div class="mt-4">
+                        <a href="/orders" class="btn btn-primary">📦 View Orders</a>
+                        <a href="/logout" class="btn btn-danger">🚪 Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card {
+        border-radius: 15px;
+        background: #f8f9fa;
+    }
+    .card-title {
+        font-weight: bold;
+    }
+    .list-group-item {
+        font-size: 18px;
+    }
+    .btn {
+        padding: 10px 20px;
+        margin: 5px;
+        font-size: 16px;
+        border-radius: 8px;
+    }
+</style>

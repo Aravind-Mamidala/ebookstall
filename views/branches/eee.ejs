@@ -1,0 +1,24 @@
+<% layout("layouts/boilerplate") %>
+
+<!-- Title Section: EEE Books -->
+<h1 class="section-title"><%= title %></h1> <!-- Use the passed title from the route -->
+
+<% if (books.length > 0) { %>
+    <div class="book-list">
+        <% books.forEach(book => { %>
+            <div class="book-card">
+                <a href="/books/<%= book._id %>" class="card-link">
+                    <img src="<%= book.coverImage %>" alt="<%= book.title %>" onerror="this.onerror=null; this.src='/images/default-book.jpg';" class="book-image">
+                    <h2 class="book-title"><%= book.title %></h2>
+                    <p class="price">$<%= book.price %></p>
+                </a>
+                <div class="button-container">
+                    <button class="buy-btn">Buy</button>
+                    <button class="add-to-cart-btn">Add to Cart</button>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+<% } else { %>
+    <p>No books available in this category.</p>
+<% } %>

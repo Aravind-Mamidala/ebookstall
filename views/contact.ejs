@@ -1,0 +1,128 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="container">
+    <div class="contact-container">
+        <div class="contact-content">
+            <h1>Contact <span>Us</span></h1>
+            <p>If you have any questions, feel free to reach out. We’re here to help!</p>
+
+            <form action="/contact" method="POST" class="contact-form">
+                <label for="name">Your Name</label>
+                <input type="text" name="name" id="name" required placeholder="Enter your name" />
+
+                <label for="email">Your Email</label>
+                <input type="email" name="email" id="email" required placeholder="Enter your email" />
+
+                <label for="message">Your Message</label>
+                <textarea name="message" id="message" required placeholder="Write your message here..."></textarea>
+
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+
+        <div class="contact-image">
+            <img src="https://img.freepik.com/free-photo/hot-line-contact-us-call-center-search-interface_53876-124009.jpg?t=st=1742402494~exp=1742406094~hmac=75f9b02b25f42d6e3220b62afae8137ce8015999797ecbf401ed3844f42a05de&w=996" alt="Contact Us">
+        </div>
+    </div>
+</div>
+
+<style>
+    .container {
+        max-width: 1200px;
+        margin: auto;
+        padding: 60px 20px;
+    }
+
+    .contact-container {
+        display: flex;
+        align-items: center;
+        gap: 40px;
+        background: white;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .contact-content {
+        flex: 1;
+    }
+
+    .contact-content h1 {
+        font-size: 2.5rem;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .contact-content h1 span {
+        color: #1976d2;
+    }
+
+    .contact-content p {
+        font-size: 1.1rem;
+        color: #555;
+        margin-bottom: 20px;
+    }
+
+    .contact-form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .contact-form label {
+        font-weight: 500;
+        margin-bottom: 8px;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 15px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        background-color: #f9f9f9;
+        font-size: 1rem;
+        outline: none;
+        transition: 0.3s ease;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+        border-color: #1976d2;
+        background-color: #e3f2fd;
+    }
+
+    .contact-form textarea {
+        min-height: 120px;
+        resize: vertical;
+    }
+
+    .contact-form button {
+        width: 100%;
+        padding: 12px;
+        font-size: 1.2rem;
+        color: white;
+        background-color: #1976d2;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: 0.3s ease;
+        margin-top: 10px;
+    }
+
+    .contact-form button:hover {
+        background-color: #1565c0;
+    }
+
+    .contact-image {
+        flex-shrink: 0;
+        width: 400px;
+        height: auto;
+    }
+
+    .contact-image img {
+        max-width: 100%;
+        border-radius: 10px;
+        box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.2);
+    }
+</style>

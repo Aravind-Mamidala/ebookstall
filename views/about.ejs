@@ -1,0 +1,73 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="container">
+    <div class="about-container">
+        <div class="about-content">
+            <h1>About <span>EbookStall</span></h1>
+            <p>
+                Welcome to EbookStall, your one-stop platform for engineering books. Our mission is to provide students and professionals with easy access to the best learning materials in various engineering disciplines.
+            </p>
+            <p>
+                Whether you're looking for Computer Science, Electrical, Mechanical, or AI & ML books, we have a wide selection to help you succeed in your academic and professional journey.
+            </p>
+            <p>
+                Our platform ensures seamless book browsing, secure payments, and a smooth user experience. We believe in making knowledge accessible to everyone, anywhere.
+            </p>
+        </div>
+
+        <div class="about-image">
+            <img src="https://www.trendingtop5.com/wp-content/uploads/2017/06/365000.png" alt="About EbookStall">
+        </div>
+    </div>
+</div>
+
+<style>
+    .container {
+        max-width: 1200px;
+        margin: auto;
+        padding: 60px 20px;
+    }
+
+    .about-container {
+        display: flex;
+        align-items: center;
+        gap: 40px;
+        background: white;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .about-content {
+        flex: 1;
+    }
+
+    .about-content h1 {
+        font-size: 2.5rem;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .about-content h1 span {
+        color: #1976d2;
+    }
+
+    .about-content p {
+        font-size: 1.1rem;
+        color: #555;
+        line-height: 1.6;
+        margin-bottom: 10px;
+    }
+
+    .about-image {
+        flex-shrink: 0;
+        width: 400px;
+        height: auto;
+    }
+
+    .about-image img {
+        max-width: 100%;
+        border-radius: 10px;
+        box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.2);
+    }
+</style>

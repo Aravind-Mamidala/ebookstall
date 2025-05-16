@@ -1,0 +1,22 @@
+<% if (success && success.length > 0) { %>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <%= success %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<% } %>
+
+<% if (error && error.length > 0) { %>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <%= error %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<% } %>
+<script>
+    setTimeout(() => {
+        let alerts = document.querySelectorAll(".alert");
+        alerts.forEach(alert => {
+            alert.classList.remove("show"); // Smoothly hide alert
+            setTimeout(() => alert.remove(), 500); // Fully remove after animation
+        });
+    }, 3000); // 3 seconds
+</script>

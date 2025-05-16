@@ -1,0 +1,185 @@
+<% layout("/layouts/boilerplate") %>
+
+<!-- Title Section -->
+<div class="form-title">
+    <h1>Edit Book</h1>
+</div>
+
+<!-- Form -->
+<form action="/books/<%= book._id %>?_method=PUT" method="POST" class="book-form">
+    <label for="title">Book Title</label>
+    <input type="text" name="title" id="title" required value="<%= book.title %>" placeholder="Enter book title" />
+
+    <label for="author">Author</label>
+    <input type="text" name="author" id="author" required value="<%= book.author %>" placeholder="Enter author's name" />
+
+    <label for="price">Price ($)</label>
+    <input type="number" name="price" id="price" required value="<%= book.price %>" placeholder="Enter book price" />
+
+    <!-- Cover Image URL with Preview -->
+    <label for="coverImage">Cover Image URL</label>
+    <input type="text" name="coverImage" id="coverImage" required value="<%= book.coverImage %>" placeholder="Enter cover image URL" oninput="updateImagePreview()" />
+    
+    <div class="image-preview">
+        <img id="imagePreview" src="<%= book.coverImage %>" alt="Book Cover Preview">
+    </div>
+
+    <!-- Category Dropdown -->
+    <label for="category">Category</label>
+    <select name="category" id="category" required>
+        <option value="cse" <%= book.category === "cse" ? "selected" : "" %>>CSE</option>
+        <option value="ece" <%= book.category === "ece" ? "selected" : "" %>>ECE</option>
+        <option value="ee" <%= book.category === "ee" ? "selected" : "" %>>EE</option>
+        <option value="civil" <%= book.category === "civil" ? "selected" : "" %>>Civil</option>
+        <option value="mech" <%= book.category === "mech" ? "selected" : "" %>>Mechanical</option>
+        <option value="ai_ml" <%= book.category === "ai_ml" ? "selected" : "" %>>AI & ML</option>
+    </select>
+
+    <!-- Description Textarea -->
+    <label for="description">Description</label>
+    <textarea name="description" id="description" required placeholder="Describe the book..."><%= book.description %></textarea>
+
+    <!-- Submit & Cancel Buttons -->
+    <button type="submit">Update Book</button>
+    <a href="/books" class="cancel-button">Cancel</a>
+</form>
+
+<!-- JavaScript for Image Preview -->
+<script>
+    function updateImagePreview() {
+        const imageUrl = document.getElementById("coverImage").value;
+        document.getElementById("imagePreview").src = imageUrl;
+    }
+</script>
+
+<style>
+    /* General Page Styling */
+    body {
+        background-color: #f4f7fc;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* Form Container */
+    .book-form {
+        width: 100%;
+        max-width: 480px;
+        margin: 40px auto;
+        padding: 30px;
+        background: #ffffff;
+        border-radius: 12px;
+        box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.1), -6px -6px 12px rgba(255, 255, 255, 0.9);
+        box-sizing: border-box;
+        font-size: 1.1rem;
+    }
+
+    /* Form Title */
+    .form-title {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .form-title h1 {
+        font-size: 2rem;
+        color: #333;
+        font-weight: 600;
+        letter-spacing: 1px;
+    }
+
+    /* Input and Select Styling */
+    .book-form input,
+    .book-form select,
+    .book-form textarea {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 18px;
+        border-radius: 8px;
+        border: 1px solid #e0e0e0;
+        background-color: #f9f9f9;
+        font-size: 1rem;
+        color: #333;
+        outline: none;
+        transition: 0.3s ease;
+    }
+
+    /* Input Focus Styling */
+    .book-form input:focus,
+    .book-form select:focus,
+    .book-form textarea:focus {
+        border-color: #4caf50;
+        background-color: #e8f5e9;
+    }
+
+    /* Placeholder Styling */
+    .book-form input::placeholder,
+    .book-form textarea::placeholder {
+        color: #b0b0b0;
+        font-style: italic;
+    }
+
+    /* Textarea Styling */
+    .book-form textarea {
+        min-height: 120px;
+        resize: vertical;
+    }
+
+    /* Submit Button Styling */
+    .book-form button {
+        width: 100%;
+        padding: 12px;
+        font-size: 1.2rem;
+        color: white;
+        background: linear-gradient(145deg, #4caf50, #81c784);
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: 0.3s ease;
+        box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.1), -6px -6px 12px rgba(255, 255, 255, 0.9);
+        margin-top: 10px;
+    }
+
+    /* Submit Button Hover & Active Effects */
+    .book-form button:hover {
+        background: linear-gradient(145deg, #388e3c, #66bb6a);
+    }
+
+    .book-form button:active {
+        background: linear-gradient(145deg, #2c6e31, #4caf50);
+    }
+
+    /* Cancel Button Styling */
+    .cancel-button {
+        display: block;
+        text-align: center;
+        margin-top: 10px;
+        color: #777;
+        text-decoration: none;
+        font-size: 1rem;
+        font-weight: 500;
+        transition: 0.3s ease;
+    }
+
+    .cancel-button:hover {
+        color: #4caf50;
+        text-decoration: underline;
+    }
+
+    /* Labels */
+    .book-form label {
+        font-weight: 500;
+        color: #333;
+        margin-bottom: 8px;
+    }
+
+    /* Image Preview Styling */
+    .image-preview {
+        text-align: center;
+        margin-bottom: 15px;
+    }
+
+    .image-preview img {
+        width: 100%;
+        max-width: 150px;
+        border-radius: 10px;
+        box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
+    }
+</style>

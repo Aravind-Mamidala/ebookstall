@@ -1,0 +1,133 @@
+<nav class="nav">
+    <div>
+        <i class="fa-solid fa-bars" id="menu-icon"></i>
+    </div>
+
+    <div class="books-menu">
+        <a href="/"> <i class="fa-solid fa-house icons"></i>&nbsp;Home</a>
+        <a href="/about">About</a>
+        <a href="/contact"><i class="fa-regular fa-id-badge icons"></i>&nbsp;Contact Us</a>
+    </div>
+
+    <input type="text" class="input" id="bookSearchInput" placeholder="Search books...">
+
+    <div class="users-menu">
+        <% if (user) { %> 
+            <a href="/profile"><i class="fa-solid fa-user icons"></i>&nbsp;Profile</a>
+            <% if (user.role === 'admin') { %>
+                <a href="/books/add"><i class="fa-solid fa-plus icons"></i>&nbsp;Add Book</a>
+            <% } %>
+            <a href="/auth/logout"><i class="fa-solid fa-sign-out-alt icons"></i>&nbsp;Logout</a>
+        <% } else { %>
+            <a href="/auth/login"><i class="fa-solid fa-sign-in-alt icons"></i>&nbsp;Login</a>
+            <a href="/auth/register"><i class="fa-solid fa-user-plus icons"></i>&nbsp;Register</a>
+        <% } %>
+    </div>
+
+    <div class="cart">
+        <% if (!user || user.role === 'buyer') { %>
+<div class="cart">
+    <% if (!user || user.role === 'buyer') { %>
+        <div class="cart">
+            <a href="/wishlist"><i class="fa-solid fa-heart"></i> Wishlist</a>
+            <a href="/cart"><i class="fa-solid fa-cart-shopping icons"></i>&nbsp;Cart</a>
+        </div>
+        <% } %>        
+</div>
+<% } %>
+
+    </div>
+</nav>
+<div class="hamburger-menu">
+    <div class="hamburger-menu-header">
+        <h3>E-Bookstall <i class="fa-solid fa-x close-icon icons" id="menu-close-icon"></i> </h3>
+        <hr style="color: aliceblue;">
+    </div>
+    <div class="hamburger-menu-body">
+        <a href="/branches/cse"><i class="fa-solid fa-computer icons"></i>CSE</a>
+        <a href="/branches/ai_ml"><i class="fa-solid fa-robot icons"></i>AI & ML</a>
+        <a href="/branches/ece"><i class="fa-solid fa-microchip icons"></i>ECE</a>
+        <a href="/branches/eee"><i class="fa-solid fa-lightbulb icons"></i>EEE</a>
+        <a href="/branches/civil"><i class="fa-solid fa-person-digging icons"></i>Civil</a>
+        <a href="/branches/mech"><i class="fa-solid fa-gear icons"></i>Mech</a>
+        <a href="/branches/chem"><i class="fa-solid fa-flask icons"></i>Chem</a>
+    </div>
+    <div class="hamburger-menu-icon">
+        <i class="fa-brands fa-facebook icons"></i>
+        <i class="fa-brands fa-instagram icons"></i>
+        <i class="fa-brands fa-youtube icons"></i>
+    </div>
+</div>
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NAVBAR</title>
+</head>
+<style>
+    .nav{
+        height: 3rem;
+        background-color: rgb(37, 35, 58);
+        display: flex;
+        align-items: center;
+        color: white;
+    }
+    .hamburger-menu{
+        margin-left: 1rem;
+        margin-right: 3rem;
+        font-size: 20px;
+    }
+    .books-menu{
+        margin-right: 2.7rem;
+        width: 27%;
+        display: flex;
+        justify-content: space-between;
+    }
+    .input{
+        width: 15%;
+        height: 36%;
+        margin-right: 3.5rem;
+    }
+    .users-menu{
+        width: 25%;
+        margin-right: 3rem;
+        display: flex;
+        justify-content: space-between;
+    }
+    .cart{
+        margin-right: 1rem;
+    }
+    a{
+        text-decoration: none;
+        color: azure;
+    }
+    .icons{
+        font-size: 0.7rem;
+    }
+
+</style>
+<body>
+    <div class="nav">
+        <div class="hamburger-menu">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+        <div class="books-menu">
+            <a href="/"> <i class="fa-solid fa-house icons"></i>&nbsp;Home</a>
+            <a href="">About</a>
+            <a href=""><i class="fa-regular fa-id-badge icons"></i>&nbsp;Contact us</a>
+        </div>
+        <input type="text" class="input">
+        <div class="users-menu">
+            <a href="/auth/login">Login</a>
+            <a href="/auth/register"><i class="fa-solid fa-user-plus icons"></i>Register</a>
+            <a href="/auth/logout"><i class="fa-solid fa-arrow-right-from-bracket icons"></i>Logout</a>
+        </div>
+        <div class="cart">
+            <a href=""><i class="fa-solid fa-cart-shopping icons"></i> &nbsp;Cart</a>
+        </div>
+    </div>
+</body>
+</html> -->

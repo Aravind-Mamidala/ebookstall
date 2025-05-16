@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Wishlist</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+    <!-- Toastify CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .wishlist-container {
+            max-width: 800px;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .wishlist-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .wishlist-item img {
+            width: 50px;
+            height: auto;
+            margin-right: 15px;
+            border-radius: 5px;
+        }
+        .wishlist-item a {
+            text-decoration: none;
+            font-weight: bold;
+            color: #007bff;
+        }
+        .wishlist-item a:hover {
+            text-decoration: underline;
+        }
+        .remove-btn {
+            border: none;
+            background: red;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .remove-btn:hover {
+            background: darkred;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wishlist-container">
+        <h2 class="text-center">Your Wishlist</h2>
+        <ul class="list-group" id="wishlist">
+            <% if (wishlist && wishlist.length > 0) { %>
+                <% wishlist.forEach(book => { %>
+                    <li class="wishlist-item list-group-item d-flex align-items-center" data-book-id="<%= book._id %>">
+                        <img src="<%= book.coverImage %>" alt="<%= book.title %>">
+                        <a href="/book/<%= book._id %>"><%= book.title %></a>
+                        <button class="remove-btn remove-wishlist-btn">Remove</button>
+                    </li>
+                <% }) %>
+            <% } else { %>
+                <li class="list-group-item text-center text-muted">Your wishlist is empty.</li>
+            <% } %>
+        </ul>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Toastify JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastify-js/1.12.0/toastify.min.js"></script>
+
+    <script>
+document.addEventListener("DOMContentLoaded", function () {
+    console.log("✅ Document Loaded!");
+
+    if (typeof Toastify !== "function") {
+        console.error("❌ Toastify is NOT loaded! Check your internet or script source.");
+        return;
+    } else {
+        console.log("✅ Toastify is loaded!");
+    }
+
+    // 🎯 Remove Wishlist Item
+    document.getElementById("wishlist").addEventListener("click", async function (event) {
+        if (event.target.classList.contains("remove-wishlist-btn")) {
+            const listItem = event.target.closest(".wishlist-item");
+            const bookId = listItem.getAttribute("data-book-id");
+
+            if (!bookId) {
+                console.error("❌ Book ID not found!");
+                return;
+            }
+
+            try {
+                const response = await fetch(`/wishlist/remove/${bookId}`, {
+                    method: "DELETE",
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.message || "Failed to remove item.");
+                }
+
+                // ✅ Show Toastify notification
+                Toastify({
+                    text: data.message || "Book removed from wishlist!",
+                    duration: 3000,
+                    close: true,
+                    gravity: "top",
+                    position: "right",
+                    backgroundColor: "linear-gradient(to right, #ff5f6d, #ffc371)",
+                }).showToast();
+
+                // ✅ Remove item from UI
+                listItem.remove();
+
+            } catch (error) {
+                console.error("❌ Error removing item:", error);
+                Toastify({
+                    text: "Error removing book!",
+                    duration: 3000,
+                    close: true,
+                    gravity: "top",
+                    position: "right",
+                    backgroundColor: "linear-gradient(to right, #ff0000, #ff8000)",
+                }).showToast();
+            }
+        }
+    });
+
+});
+    </script>
+
+</body>
+</html>

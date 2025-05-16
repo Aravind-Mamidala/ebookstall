@@ -1,0 +1,116 @@
+<% layout("/layouts/boilerplate") %>
+
+<!-- ✅ Top Border and Padding Above Slider -->
+<div class="container py-3 border-top border-bottom">
+  <div class="swiper mySwiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide"><img src="/library1.jpg" alt="Library 1"></div>
+      <div class="swiper-slide"><img src="/library2.jpg" alt="Library 2"></div>
+      <div class="swiper-slide"><img src="/library3.jpg" alt="Library 3"></div>
+      <div class="swiper-slide"><img src="/library4.jpg" alt="Library 4"></div>
+      <div class="swiper-slide"><img src="/library5.jpg" alt="Library 5"></div>
+    </div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-pagination"></div>
+  </div>
+</div>
+
+<!-- ✅ Book Grid Section -->
+<div class="container mt-5">
+  <h3 class="mb-4 text-center border-bottom pb-2">Explore All Books</h3>
+
+  <div id="book-list" class="row g-4 justify-content-center">
+    <% books.slice(0, 8).forEach(book => { %>
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3 book-item">
+        <div class="card h-100 shadow-sm">
+          <img src="<%= book.coverImage %>" class="card-img-top" alt="<%= book.title %>" style="height: 250px; object-fit: cover;">
+          <div class="card-body">
+            <h5 class="card-title"><%= book.title %></h5>
+            <p class="card-text text-muted mb-1">By <%= book.author %></p>
+            <p class="card-text fw-bold">₹<%= book.price %></p>
+            <a href="/books/<%= book._id %>" class="btn btn-sm btn-primary">View</a>
+          </div>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+
+  <div class="text-center mt-4">
+    <button id="showMoreBtn" class="btn btn-outline-secondary">Show More</button>
+  </div>
+</div>
+
+<!-- ✅ Bottom Border Padding before Footer -->
+<div class="container mt-5 border-top pt-4"></div>
+
+<!-- ✅ JS for Show More -->
+<script>
+const allBooks = <%- JSON.stringify(books) %>;
+  let visibleCount = 8;
+
+  document.getElementById("showMoreBtn").addEventListener("click", () => {
+    const container = document.getElementById("book-list");
+    const nextBooks = allBooks.slice(visibleCount, visibleCount + 8);
+    nextBooks.forEach(book => {
+      const col = document.createElement("div");
+      col.className = "col-12 col-sm-6 col-md-4 col-lg-3 book-item";
+      col.innerHTML = `
+        <div class="card h-100 shadow-sm">
+          <img src="${book.coverImage}" class="card-img-top" alt="${book.title}" style="height: 250px; object-fit: cover;">
+          <div class="card-body">
+            <h5 class="card-title">${book.title}</h5>
+            <p class="card-text text-muted mb-1">By ${book.author}</p>
+            <p class="card-text fw-bold">₹${book.price}</p>
+            <a href="/books/${book._id}" class="btn btn-sm btn-primary">View</a>
+          </div>
+        </div>
+      `;
+      container.appendChild(col);
+    });
+    visibleCount += 8;
+    if (visibleCount >= allBooks.length) {
+      document.getElementById("showMoreBtn").style.display = "none";
+    }
+  });
+
+
+
+  const searchInput = document.getElementById("bookSearchInput");
+
+  searchInput.addEventListener("input", () => {
+    const query = searchInput.value.toLowerCase();
+    const container = document.getElementById("book-list");
+    container.innerHTML = "";
+
+    const filteredBooks = allBooks.filter(book =>
+      book.title.toLowerCase().includes(query)
+    );
+
+    if (filteredBooks.length === 0) {
+      container.innerHTML = `<p class="text-center text-muted mt-3">No books found.</p>`;
+      document.getElementById("showMoreBtn").style.display = "none";
+      return;
+    }
+
+    filteredBooks.slice(0, 8).forEach(book => {
+      const col = document.createElement("div");
+      col.className = "col-12 col-sm-6 col-md-4 col-lg-3 book-item";
+      col.innerHTML = `
+        <div class="card h-100 shadow-sm">
+          <img src="${book.coverImage}" class="card-img-top" alt="${book.title}" style="height: 250px; object-fit: cover;">
+          <div class="card-body">
+            <h5 class="card-title">${book.title}</h5>
+            <p class="card-text text-muted mb-1">By ${book.author}</p>
+            <p class="card-text fw-bold">₹${book.price}</p>
+            <a href="/books/${book._id}" class="btn btn-sm btn-primary">View</a>
+          </div>
+        </div>
+      `;
+      container.appendChild(col);
+    });
+
+    document.getElementById("showMoreBtn").style.display =
+      filteredBooks.length > 8 ? "block" : "none";
+  });
+</script>
