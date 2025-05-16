@@ -39,9 +39,12 @@ app.set("view engine","ejs");
 app.set("views", __dirname + "/views");
 
 // ✅ Connect to MongoDB
-mongoose.connect(dbUrl)
-    .then(() => console.log("Connected to DB"))
-    .catch((err) => console.log(err));
+mongoose.connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("MongoDB Atlas connected 🚀"))
+  .catch((err) => console.error("MongoDB connection error ❌:", err));
 // passport
 
 app.use((req, res, next) => {
