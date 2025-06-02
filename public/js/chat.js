@@ -1,15 +1,18 @@
 class ChatBox {
     constructor() {
+        console.log('ChatBox constructor called');
         this.sessionId = null;
         this.isOpen = false;
         this.initialize();
     }
 
     async initialize() {
+        console.log('Initializing ChatBox');
         // Create chat UI
         this.createChatUI();
         
         try {
+            console.log('Attempting to initialize chat session');
             // Initialize chat session
             const response = await fetch('/chat/init', {
                 method: 'POST',
@@ -22,6 +25,7 @@ class ChatBox {
             
             const data = await response.json();
             this.sessionId = data.sessionId;
+            console.log('Chat session initialized:', this.sessionId);
             
             // Add welcome message
             this.addMessage(data.message.message, true);
@@ -151,5 +155,6 @@ class ChatBox {
 
 // Initialize chat when document is ready
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM loaded, initializing ChatBox');
     new ChatBox();
 }); 

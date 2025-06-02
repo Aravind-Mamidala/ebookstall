@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require("mongoose");
 require("dotenv").config();
 const methodOverride = require("method-override");
+const path = require("path");
 app.use(methodOverride("_method"));
 
 const port = process.env.PORT || 5000;
@@ -71,7 +72,7 @@ app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));  // ✅ Handles form data
 app.use(express.json());  // ✅ Handles JSON data
 app.use(methodOverride("_method"));  // ✅ Supports PUT & DELETE
-app.use(express.static("public"));  // ✅ Serve static files like CSS
+app.use(express.static(path.join(__dirname, "public")));  // ✅ Serve static files like CSS
 
 app.use((req, res, next) => {
     res.locals.user = req.user || null; // Set user globally
