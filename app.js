@@ -5,17 +5,16 @@ require("dotenv").config();
 const methodOverride = require("method-override");
 app.use(methodOverride("_method"));
 
-const dbUrl = process.env.MONGO_URL;
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 const session = require("express-session");
 const flash = require("connect-flash");
 app.use(session({
-    secret: "yourSecretKey",
+    secret: process.env.SESSION_SECRET || "yourSecretKey",
     resave: false,
     saveUninitialized: false,
     cookie: { 
-        secure: false, // ❌ Change to true if using HTTPS
+        secure: process.env.NODE_ENV === 'production', // Secure in production
         maxAge: 1000 * 60 * 10 // ✅ Keep session for 10 minutes
     }
 }));
@@ -40,12 +39,12 @@ app.set("view engine","ejs");
 app.set("views", __dirname + "/views");
 
 // ✅ Connect to MongoDB
-mongoose.connect(process.env.MONGO_URI, {
+mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/ebookstall', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-  })
-  .then(() => console.log("MongoDB Atlas connected 🚀"))
-  .catch((err) => console.error("MongoDB connection error ❌:", err));
+})
+.then(() => console.log("MongoDB connected 🚀"))
+.catch((err) => console.error("MongoDB connection error ❌:", err));
 // passport
 
 app.use((req, res, next) => {
