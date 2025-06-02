@@ -31,6 +31,7 @@ const pagesRoutes = require("./routes/index");
 const cartRoutes=require("./routes/cart");
 const profileRoutes = require("./routes/profile"); // Import Profile Route
 const wishlistRoutes=require("./routes/wishlist");
+const chatRouter = require('./routes/chat');
 
 
 const engine=require("ejs-mate");
@@ -89,6 +90,7 @@ app.use("/", pagesRoutes);
 app.use("/cart", cartRoutes);
 app.use("/profile", profileRoutes); // Use Profile Route
 app.use("/wishlist",wishlistRoutes);
+app.use('/chat', chatRouter);
 
 app.get("/test-flash", (req, res) => {
     req.flash("success", "This is a test success message!");

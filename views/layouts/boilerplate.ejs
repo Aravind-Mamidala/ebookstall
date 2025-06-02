@@ -17,6 +17,10 @@
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastify-js/1.12.0/toastify.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Chat CSS -->
+    <link rel="stylesheet" href="/css/chat.css">
 </head>
 
 <body class="d-flex flex-column min-vh-100">
@@ -83,5 +87,15 @@
     </script>
     
     <script src="/script.js"></script>
+    
+    <!-- Chat script -->
+    <script src="/js/chat.js"></script>
+    
+    <!-- Pass user info to chat if logged in -->
+    <% if (locals.user) { %>
+    <script>
+        window.userId = '<%= user._id %>';
+    </script>
+    <% } %>
 </body>
 </html>
